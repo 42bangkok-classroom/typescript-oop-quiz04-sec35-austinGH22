@@ -13,7 +13,7 @@ export class UserService {
   }
   finAll(): IUser[] {
     const fileContent = fs.readFileSync('./data/users.json', 'utf-8');
-    const users = JSON.parse(fileContent);
+    const users = JSON.parse(fileContent) as IUser[];
     return users;
   }
 }
