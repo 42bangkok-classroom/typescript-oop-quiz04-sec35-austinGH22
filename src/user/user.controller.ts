@@ -14,6 +14,6 @@ export class UserController {
 
   @Get()
   findAll(): IUser[] {
-    return this.userService.finAll();
+    return this.userService.findAll();
   }
 }
