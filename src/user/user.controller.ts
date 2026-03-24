@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { Get } from '@nestjs/common';
 import { UserService, typeInterface } from './user.service';
+import { IUser } from './user.interface';
 
 @Controller('users')
 export class UserController {
@@ -9,5 +10,10 @@ export class UserController {
   @Get('test')
   test(): typeInterface[] {
     return this.userService.test();
+  }
+
+  @Get()
+  findAll(): IUser[] {
+    return this.userService.finAll();
   }
 }
