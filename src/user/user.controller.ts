@@ -20,23 +20,15 @@ export class UserController {
   findAll(): IUser[] {
     return this.userService.findAll();
   }
-  
 
   @Get(':id')
-  findOne(
-    @Param('id') id: string,         
-    @Query('fields') fields?: string  
-  ) {
+  findOne(@Param('id') id: string, @Query('fields') fields?: string) {
     const fieldsArray = fields ? fields.split(',') : undefined;
     return this.userService.findOne(id, fieldsArray);
   }
 
   @Post()
-  create(
-    @Body(new ValidationPipe()) createUserDto: CreateUserDto){
-   return this.userService.create(createUserDto)
- }
- 
-
+  create(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
+    return this.userService.create(createUserDto);
+  }
 }
-
