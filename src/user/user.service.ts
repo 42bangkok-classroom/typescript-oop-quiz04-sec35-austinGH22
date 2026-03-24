@@ -28,13 +28,13 @@ export class UserService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
-
-    if (fields && fields.length > 0) {
+    if (fields) {
       const filteredUser: Partial<IUser> = {};
+      
       fields.forEach((field) => {
-        // ดึงเฉพาะข้อมูลที่ขอ มาใส่ใน Object ใหม่ (ใช้ as keyof IUser เพื่อกัน Linter บ่น)
         filteredUser[field as keyof IUser] = user[field as keyof IUser];
       });
+
       return filteredUser;
     }
     return user;
