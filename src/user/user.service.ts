@@ -20,23 +20,23 @@ export class UserService {
     return users;
   }
 
-  findOne(id: string, fields?: string[]): Partial<IUser>{
-    const allUsers = this.findAll()
+  findOne(id: string, fields?: string[]): Partial<IUser> {
+    const allUsers = this.findAll();
     // 2. ค้นหา User ที่มี id ตรงกับที่ส่งมา
-    const user = allUsers.find((u)=> u.id === id)
-    //Throw Error 
-    if(!user){
-      throw new NotFoundException('User not found')
+    const user = allUsers.find((u) => u.id === id);
+    //Throw Error
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
 
-    if(fields && fields.length>0 ){
-      const filteredUser: Partial<IUser> = {}
+    if (fields && fields.length > 0) {
+      const filteredUser: Partial<IUser> = {};
       fields.forEach((field) => {
         // ดึงเฉพาะข้อมูลที่ขอ มาใส่ใน Object ใหม่ (ใช้ as keyof IUser เพื่อกัน Linter บ่น)
         filteredUser[field as keyof IUser] = user[field as keyof IUser];
       });
-       return filteredUser;
+      return filteredUser;
     }
-    return user
+    return user;
   }
 }
