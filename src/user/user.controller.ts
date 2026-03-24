@@ -1,4 +1,4 @@
-import { Controller, Type } from "@nestjs/common";
+import { Controller } from "@nestjs/common";
 import { Get } from "@nestjs/common";
 import { UserService , typeInterface} from "./user.service";
 
