@@ -4,6 +4,8 @@ import { IUser } from './user.interface';
 
 import { NotFoundException } from '@nestjs/common';
 
+import { CreateUserDto } from './dto/create-user.dto';
+
 export interface typeInterface {
   name?: string;
   number?: number;
@@ -40,4 +42,29 @@ export class UserService {
     }
     return user;
   }
+
+
+  create(dto: CreateUserDto): IUser{
+    const allUsers = this.findAll()
+    //net id 
+    let nextID = '1'
+    if(allUsers.length>0){
+      const maxID = Math.max(...allUsers.map(user => Number(user.id)))
+      nextID= String(maxID + 1)
+    }
+    //make a new user 
+    const newUser: IUser = {
+      id: nextID,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      email: dto.email,
+      username: dto.username
+    }
+    //push newuser  in array 
+    allUsers.push(newUser)
+
+    //write in file 
+    fs.writeFileSync('./data/users.json',JSON.stringify(allUsers, null, 2),'utf-8')
+    return newUser
+  } 
 }
