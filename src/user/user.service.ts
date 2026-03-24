@@ -28,9 +28,10 @@ export class UserService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+
     if (fields) {
       const filteredUser: Partial<IUser> = {};
-      
+
       fields.forEach((field) => {
         filteredUser[field as keyof IUser] = user[field as keyof IUser];
       });
